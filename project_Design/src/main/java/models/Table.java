@@ -25,13 +25,13 @@ public class Table {
         return rows;
     }
 
-    public void addColumn(Column column) {
-        schema.addColumn(column);
+    public void   addColumn(Column column) {
+         schema.addColumn(column);
     }
 
-    public void addRow(Row row) {
-        rows.add(row);
-        System.out.println("Row added to table " + name);
+    public boolean addRow(Row row) {
+      return  rows.add(row);
+        
     }
 
     public void removeRow(Row row) {

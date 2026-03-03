@@ -3,6 +3,8 @@
  
 package Validation;
 
+import java.util.List;
+
 import models.Column;
 import models.DataBase;
 import models.Row;
@@ -14,12 +16,12 @@ import models.Table;
 public class SchemaMatchValidator implements Validator {
 
     String tableName;
-    Row row;
+    List<Row> rows;
     DataBase dataBase;
 
-    public SchemaMatchValidator(String tableName, Row row, DataBase dataBase) {
+    public SchemaMatchValidator(String tableName, List<Row> rows, DataBase dataBase) {
         this.tableName = tableName;
-        this.row = row;
+        this.rows = rows;
         this.dataBase = dataBase;
     }
 
@@ -29,7 +31,8 @@ public class SchemaMatchValidator implements Validator {
 
         Schema schema = table.getSchema();
         java.util.List<Column> columns = schema.getColumns();
-        for (Column column : columns) {
+        for (Row row : rows ) {
+            for (Column column : columns) {
 
             Object value = row.getValue(column.getName());
 
@@ -74,8 +77,8 @@ public class SchemaMatchValidator implements Validator {
                     break;
             }
 
-        }
-
+        }}
+for (Row row : rows) {
 
 for (String key : row.getValues().keySet()) {
     boolean exists = false;
@@ -89,3 +92,4 @@ for (String key : row.getValues().keySet()) {
         throw new IllegalArgumentException("Column " + key + " does not exist in schema");
     }
 }}}
+    }

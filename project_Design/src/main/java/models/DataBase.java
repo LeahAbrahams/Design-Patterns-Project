@@ -31,6 +31,16 @@ public void setTables(Map<String, Table> tables) {
         this.tables.clear();
         this.tables.putAll(tables);
     }
+    public List<Row> insertIntoTable(String tableName,List<Row> rows) {
+        Table table = tables.get(tableName);
+        List<Row> insertedRows = new java.util.ArrayList<>();
+        for (Row row : rows) {
+           if( table.addRow(row))
+           insertedRows.add(row);
+        }
+        return insertedRows;
+        
+    }
     public void setName(String name) {
        this.name = name;
     }
@@ -46,8 +56,6 @@ public void setTables(Map<String, Table> tables) {
     public void removeTable(String tableName) {
         if (tables.remove(tableName) != null) {
             System.out.println("Table " + tableName + " was removed from database " + name);
-        } else {
-            System.out.println("Table " + tableName + " not found in database " + name);
-        }
+        } 
     }
 }
