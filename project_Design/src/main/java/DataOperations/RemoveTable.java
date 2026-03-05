@@ -4,11 +4,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DataOperations;
-import models.DataBase;
-import models.Row;
+import java.util.List;
+
 import Validation.TableMustExistValidator;
 import Validation.Validator;
-import java.util.List;
+import models.DataBase;
+import models.Row;
 /**
  *
  * @author ברכי
@@ -16,12 +17,10 @@ import java.util.List;
 public class RemoveTable extends AbstractOperation {
 
  
-  private final  String tableName;
-  private final  DataBase database;
+ 
     private final  List<Validator> validators=new java.util.ArrayList<>();   
         public RemoveTable( String tableName,DataBase database) {
-        this.tableName = tableName;
-        this.database = database;
+        super(database, tableName);
         this.validators.add(new TableMustExistValidator(tableName, database));
        
     }
@@ -32,7 +31,7 @@ public class RemoveTable extends AbstractOperation {
     }
     @Override
    public List<Row> execute() {
-         database.removeTable(tableName);
+         database.getTables().remove(tableName);
          return List.of();
        
        

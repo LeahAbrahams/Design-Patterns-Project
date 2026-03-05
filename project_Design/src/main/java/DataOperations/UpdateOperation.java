@@ -17,15 +17,14 @@ import models.Table;
 public class UpdateOperation extends AbstractOperation {
     private  final List<Row> rows;
     private final  List<Row> newRows;  
-    private final  DataBase database;
-    private final  String tableName;
+    
     private final  List<Validator> validators=new java.util.ArrayList<>();
 
 public UpdateOperation(DataBase database, String tableName,List<Row> rows,List<Row> newRows) {
+        super(database, tableName);
         this.rows = rows;
         this.newRows = newRows;
-        this.database = database;
-        this.tableName = tableName;
+        
         this.validators.add(new TableMustExistValidator(tableName, database));
         this.validators.add(new SchemaMatchValidator(tableName, newRows, database));
             this.validators.add(new RowExistValidator(tableName, rows, database)); // Assuming all rows have the same schema

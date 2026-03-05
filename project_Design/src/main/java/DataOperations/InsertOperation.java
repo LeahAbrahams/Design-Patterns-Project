@@ -16,13 +16,11 @@ import models.Row;
  * @author ברכי
  */
 public class InsertOperation extends AbstractOperation {
-    private final DataBase database;
-    private final String tableName; 
+   
     private final List<Row> rows;
     private final List<Validator> validators=new java.util.ArrayList<>();
     public InsertOperation(DataBase database, String tableName, List<Row> rows) {
-        this.database = database;
-        this.tableName = tableName;
+        super(database, tableName);
         this.rows = rows;
         this.validators.add(new TableMustExistValidator(tableName, database));
        this.validators.add(new SchemaMatchValidator(tableName, rows, database));

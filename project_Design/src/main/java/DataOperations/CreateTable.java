@@ -12,46 +12,46 @@ import Validation.Validator;
 import builder.TableBuilder;
 import models.Column;
 import models.DataBase;
-import  models.Row;
+import models.Row;
+
 /**
  *
  * @author ברכי
  */
 public class CreateTable extends AbstractOperation {
-  private final List<Column> columns;
-  private final  String tableName;
-  private final  DataBase database;
-    private final  List<Validator> validators=new java.util.ArrayList<>();   
-        public CreateTable(List<Column> columns, String tableName,DataBase database) {
+
+    private final List<Column> columns;
+   
+    private final List<Validator> validators = new java.util.ArrayList<>();
+
+    public CreateTable(List<Column> columns, String tableName, DataBase database) {
+        super(database, tableName);
         this.columns = columns;
-        this.tableName = tableName;
-        this.database = database;
+      
         this.validators.add(new TableExistValidator(database, tableName));
-       
+
     }
+
     @Override
     public List<Row> run() {
         this.validate();
         return this.execute();
     }
-    @Override
-   public List<Row> execute() {
-       TableBuilder builder = new TableBuilder();
-       builder.build(tableName, columns);
-       return database.addTable(builder.getTable()).getRows();
-       
-       
-   } 
-   @Override
-public void validate() {
-    for (Validator validatorn : validators) {
-       validatorn.validator();
-      
-      
 
-        
+    @Override
+    public List<Row> execute() {
+        TableBuilder builder = new TableBuilder();
+        builder.build(tableName, columns);
+        return database.addTable(builder.getTable()).getRows();
+
     }
 
+    @Override
+    public void validate() {
+        for (Validator validatorn : validators) {
+            validatorn.validator();
 
-}
+        }
+
+    }
 }
