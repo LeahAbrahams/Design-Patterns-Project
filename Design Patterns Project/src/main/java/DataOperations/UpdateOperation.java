@@ -39,7 +39,7 @@ public class UpdateOperation extends AbstractOperation {
             int oldIndex = rows.indexOf(row);
             int newIndex = newRows.indexOf(newRows.get(oldIndex));
             if (newIndex >= 0) {
-                table.getRows().set(index, newRows.get(newIndex));
+                table.updateRow(index, newRows.get(newIndex));
                 updatedRows.add(newRows.get(newIndex));
             }
         }

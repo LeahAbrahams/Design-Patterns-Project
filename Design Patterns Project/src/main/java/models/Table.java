@@ -1,9 +1,13 @@
 package models;
 
+import Logger.IInformer;
+import Logger.Informer;
+
 public class Table implements Cloneable {
     private String name;
     private Schema schema;
     private final java.util.List<Row> rows = new java.util.ArrayList<>();
+    private IInformer informer = new Informer();
 
     public String getName() {
         return name;
@@ -21,20 +25,31 @@ public class Table implements Cloneable {
         return rows;
     }
 
+    public IInformer getInformer() {
+        return informer;
+    }
+
     public void addColumn(Column column) {
         schema.addColumn(column);
     }
 
     public boolean addRow(Row row) {
-        return rows.add(row);
+        boolean result = rows.add(row);
+        if (result) {
+            informer.notifyObservers("INSERT: Row added to table '" + name + "'");
+        }
+        return result;
     }
 
     public void removeRow(Row row) {
         if (rows.remove(row)) {
-            System.out.println("Row removed from table " + name);
-        } else {
-            System.out.println("Row not found in table " + name);
+            informer.notifyObservers("DELETE: Row removed from table '" + name + "'");
         }
+    }
+
+    public void updateRow(int index, Row newRow) {
+        Row oldRow = rows.set(index, newRow);
+        informer.notifyObservers("UPDATE: Row updated in table '" + name + "'");
     }
 
     @Override
