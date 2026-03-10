@@ -2,15 +2,6 @@
 
 A comprehensive Java-based in-memory database management system demonstrating the practical implementation of **7 Design Patterns** from all three GoF categories (Creational, Structural, and Behavioral).
 
-## 📋 Table of Contents
-- [Overview](##overview)
-- [Design Patterns Implemented](##design-patterns-implemented)
-- [Project Structure](##project-structure)
-- [Prerequisites](##prerequisites)
-- [How to Run](##how-to-run)
-- [Features](##features)
-- [Usage Examples](##usage-examples)
-
 ---
 
 ## 🎯 Overview
